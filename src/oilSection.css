@@ -1,0 +1,35 @@
+.oil-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    border: 1px solid green;
+}
+
+.oil-sec {
+    border: 1px solid red;
+    padding: 10px;
+    display: flex;
+
+}
+
+.oil-sec select {
+    height: 40px;
+}
+
+label {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.input-style {
+    height: 35px;
+}
+
+.m-3 {
+    margin: 5px;
+}
+
+.mr-3 {
+    margin: 5px;
+}

@@ -1,0 +1,56 @@
+
+
+
+.food-container{
+    flex-basis: 50%;
+    border: 1px solid blue;
+    padding: 20px;
+}
+
+.food-sec{
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.food-sec input{
+    width: 15px;
+    height: 15px;
+}
+
+.food-sec label{
+    font-size: 25px;
+}
+
+.food-sec-left{
+    flex-basis: 40%;
+    border: 1px solid purple;
+    padding: 3px;
+}
+
+.food-sec-right{
+    flex-basis: 60%;
+    border: 1px solid orange;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.food-sec-right input{
+    width: 50%;
+    margin:3px;
+}
+
+
+.total-cont{
+    border:1px solid black;
+    padding: 10px;
+}
+
+.total-rect{
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 3px 10px; 
+    display: flex;
+    flex-direction: column;
+}
