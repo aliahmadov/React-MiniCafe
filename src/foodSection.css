@@ -3,8 +3,9 @@
 
 .food-container{
     flex-basis: 50%;
-    border: 1px solid blue;
     padding: 20px;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
 }
 
 .food-sec{
@@ -19,18 +20,16 @@
 }
 
 .food-sec label{
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .food-sec-left{
     flex-basis: 40%;
-    border: 1px solid purple;
     padding: 3px;
 }
 
 .food-sec-right{
     flex-basis: 60%;
-    border: 1px solid orange;
     display: flex;
     justify-content: center;
     padding: 5px;
@@ -43,7 +42,6 @@
 
 
 .total-cont{
-    border:1px solid black;
     padding: 10px;
 }
 

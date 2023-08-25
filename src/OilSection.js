@@ -1,16 +1,76 @@
-import React from "react";
+import React, {  useState } from "react";
 import { oilTypes } from "./Data";
 import "./oilSection.css";
 let uniqueID = 0;
 
-export default function OilSection() {
+
+
+
+export default function OilSection({ priceA, setPriceA }) {
+ 
+  let [selectedOilType, setOilType] = useState({
+    name: "",
+    price: 0
+  });
+
+  function handleRadioBtn(event) {
+    let totalEl = document.getElementById("total-price");
+    let volumeInput = document.getElementById("volume-input");
+    let priceInput = document.getElementById("price-inp");
+    volumeInput.value="";
+    priceInput.value="";
+    totalEl.innerHTML="0.00 $";
+    if (event.target.value === "volume") {
+      volumeInput.disabled = false;
+      priceInput.disabled = true;
+    } else {
+      priceInput.disabled = false;
+      volumeInput.disabled = true;
+    }
+  }
+
+  function handleOilTypeChange(event) {
+    let priceEl = document.getElementById("price-input");
+    let selectedOilType = oilTypes.find((o) => o.name === event.target.value);
+    setOilType(selectedOilType);
+    console.log(selectedOilType);
+    priceEl.value = selectedOilType.price;
+  }
+
+  function handleVolumeChange(event) {
+    let totalEl = document.getElementById("total-price");
+    if (Number(event.target.value > 0)) {    
+      let price = Number(event.target.value) * selectedOilType.price;
+      totalEl.innerHTML = price.toFixed(2).toString()+"$";
+      setPriceA(price);
+    }
+    else{
+      setPriceA(0);
+      totalEl.innerHTML="0.00 $";
+    }
+  }
+
+  function handlePriceChange(event) {
+    let totalEl=document.getElementById("total-price");
+    let volumeInput=document.getElementById("volume-input");
+    if(Number(event.target.value)>0)
+    {
+      totalEl.innerHTML=Number(event.target.value).toFixed(2).toString()+"$";
+      volumeInput.value=(Number(event.target.value)/selectedOilType.price).toFixed(2);
+      setPriceA(Number(event.target.value));
+    }
+    else{
+      totalEl.innerHTML="0.00 $"
+      volumeInput.value="";
+    }
+  }
   return (
     <div className="oil-container">
       <h1>Oil Section</h1>
       <div className="oil-sec">
-        <div style={{display:"flex",flexDirection:"column",width:"90%"}}>
+        <div style={{ display: "flex", flexDirection: "column", width: "90%" }}>
           <label>Oil Type</label>
-          <select>
+          <select onChange={(e) => handleOilTypeChange(e)}>
             {oilTypes.map((o) => (
               <option key={uniqueID++} value={o.name}>
                 {o.name}
@@ -21,9 +81,13 @@ export default function OilSection() {
       </div>
 
       <div className="oil-sec">
-        <div style={{display:"flex",flexDirection:"column",width:"90%"}}>
+        <div style={{ display: "flex", flexDirection: "column", width: "90%" }}>
           <label>Price</label>
-          <input className="input-style" disabled></input>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input id="price-input" className="input-style" disabled></input>
+            <label style={{ fontSize: "25px" }}>$</label>
+          </div>
         </div>
       </div>
 
@@ -38,33 +102,47 @@ export default function OilSection() {
           <div>
             <input
               type="radio"
-              id="quantity"
-              value="quantity"
+              id="volume"
+              value="volume"
               name="options"
+              onChange={(e) => handleRadioBtn(e)}
             ></input>
-            <label>Quantity</label>
+            <label>By volume</label>
           </div>
 
           <div>
             <input
               type="radio"
-              id="volume"
+              id="price"
               name="options"
-              value="volume"
+              value="price"
+              onChange={(e) => handleRadioBtn(e)}
             ></input>
-            <label>Volume</label>
+            <label>By price</label>
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="m-3">
-            <input className="mr-3" disabled></input>
+            <input
+              type="number"
+              className="mr-3"
+              disabled
+              id="volume-input"
+              onChange={(e) => handleVolumeChange(e)}
+            ></input>
             <label>l.</label>
           </div>
 
           <div className="m-3">
-            <input className="mr-3" disabled></input>
-            <label>qty.</label>
+            <input
+              onChange={(e) => handlePriceChange(e)}
+              type="number"
+              className="mr-3"
+              disabled
+              id="price-inp"
+            ></input>
+            <label>$</label>
           </div>
         </div>
       </div>
@@ -78,11 +156,13 @@ export default function OilSection() {
             borderRadius: "15px",
           }}
         >
-          <div >
+          <div>
             <h2>Total Price</h2>
           </div>
-          <div style={{ textAlign: "right"}}>
-            <p style={{ fontSize: "55px" }}>64.00 $</p>
+          <div style={{ textAlign: "right" }}>
+            <p id="total-price" style={{ fontSize: "55px" }}>
+              0.00 $
+            </p>
           </div>
         </div>
       </div>
